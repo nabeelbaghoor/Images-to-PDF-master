@@ -1,4 +1,4 @@
-package nabeelbaghoor.createpdf.util;
+package nabeelbaghoor.I2PConverterApp.util;
 
 import android.content.Context;
 import android.os.Environment;
@@ -10,7 +10,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import swati4star.createpdf.R;
+import nabeelbaghoor.I2PConverterApp.R;
 
 public class DirectoryUtils {
 

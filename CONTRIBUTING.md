@@ -1,7 +1,7 @@
 # Contributing
 
 When contributing to this repository, please first discuss the change you wish to 
-make via issue, email (swati4star@gmail.com) , or any other method with the owners 
+make via issue, email (nabeelbaghoor@gmail.com) , or any other method with the owners 
 of this repository before making a change. 
 
 ## Pull Request Process

@@ -1,4 +1,4 @@
-package nabeelbaghoor.createpdf.util;
+package nabeelbaghoor.I2PConverterApp.util;
 
 import android.app.Activity;
 import android.widget.FrameLayout;
@@ -8,7 +8,7 @@ import androidx.annotation.DimenRes;
 
 import com.dd.morphingbutton.MorphingButton;
 
-import swati4star.createpdf.R;
+import nabeelbaghoor.I2PConverterApp.R;
 
 //import android.support.annotation.ColorRes;
 //import android.support.annotation.DimenRes;

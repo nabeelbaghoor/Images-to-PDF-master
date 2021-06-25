@@ -1,4 +1,4 @@
-package nabeelbaghoor.createpdf.util;
+package nabeelbaghoor.I2PConverterApp.util;
 
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
@@ -12,13 +12,13 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
 
-import swati4star.createpdf.R;
+import nabeelbaghoor.I2PConverterApp.R;
 
 //import android.support.v4.content.FileProvider;
 
 public class FileUtils {
 
-    public static final String AUTHORITY_APP = "com.swati4star.shareFile";
+    public static final String AUTHORITY_APP = "com.nabeelbaghoor.shareFile";
     private final Activity mContext;
 
     public FileUtils(Activity context) {

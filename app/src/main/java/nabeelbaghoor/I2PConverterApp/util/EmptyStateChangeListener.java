@@ -1,4 +1,4 @@
-package nabeelbaghoor.createpdf.interfaces;
+package nabeelbaghoor.I2PConverterApp.util;
 
 public interface EmptyStateChangeListener {
     void setEmptyStateVisible();

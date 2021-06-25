@@ -1,4 +1,4 @@
-package nabeelbaghoor.createpdf.adapter;
+package nabeelbaghoor.I2PConverterApp;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
@@ -17,10 +17,9 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import swati4star.createpdf.R;
-import nabeelbaghoor.createpdf.database.DatabaseHelper;
-import nabeelbaghoor.createpdf.interfaces.EmptyStateChangeListener;
-import nabeelbaghoor.createpdf.util.FileUtils;
+import nabeelbaghoor.I2PConverterApp.R;
+import nabeelbaghoor.I2PConverterApp.util.EmptyStateChangeListener;
+import nabeelbaghoor.I2PConverterApp.util.FileUtils;
 
 //import android.support.annotation.NonNull;
 //import android.support.v7.widget.RecyclerView;

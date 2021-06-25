@@ -9,12 +9,12 @@ import org.mockito.junit.MockitoJUnitRunner;
 import java.io.File;
 import java.util.TimeZone;
 
-import nabeelbaghoor.createpdf.util.FileUtils;
+import nabeelbaghoor.I2PConverterApp.util.FileUtils;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.mockito.Mockito.when;
-import static nabeelbaghoor.createpdf.util.FileUtils.getFileName;
+import static nabeelbaghoor.I2PConverterApp.util.FileUtils.getFileName;
 
 @RunWith(MockitoJUnitRunner.class)
 public class FileUtilsTest {

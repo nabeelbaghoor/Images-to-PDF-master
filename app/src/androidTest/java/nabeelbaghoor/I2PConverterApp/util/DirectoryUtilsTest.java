@@ -1,4 +1,4 @@
-package swati4star.createpdf.util;
+package nabeelbaghoor.I2PConverterApp.util;
 
 import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
@@ -13,8 +13,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
-
-import nabeelbaghoor.createpdf.util.DirectoryUtils;
 
 import static java.util.Arrays.asList;
 

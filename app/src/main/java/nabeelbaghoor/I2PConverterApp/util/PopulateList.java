@@ -1,4 +1,4 @@
-package nabeelbaghoor.createpdf.util;
+package nabeelbaghoor.I2PConverterApp.util;
 
 import android.os.AsyncTask;
 import android.os.Handler;
@@ -10,8 +10,7 @@ import androidx.annotation.Nullable;
 import java.io.File;
 import java.util.ArrayList;
 
-import nabeelbaghoor.createpdf.adapter.ViewFilesAdapter;
-import nabeelbaghoor.createpdf.interfaces.EmptyStateChangeListener;
+import nabeelbaghoor.I2PConverterApp.ViewFilesAdapter;
 
 public class PopulateList extends AsyncTask<Void, Void, Void> {
 

@@ -12,7 +12,7 @@
         android:baselineAligned="false"
         android:orientation="horizontal"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        tools:context="nabeelbaghoor.createpdf.activity.MainActivity">
+        tools:context="nabeelbaghoor.I2PConverterApp.MainActivity">
 
         <com.balysv.materialripple.MaterialRippleLayout
             android:id="@+id/fileRipple"

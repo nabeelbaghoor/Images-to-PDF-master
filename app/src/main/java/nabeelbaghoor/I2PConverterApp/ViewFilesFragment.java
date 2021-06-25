@@ -1,4 +1,4 @@
-package nabeelbaghoor.createpdf.fragment;
+package nabeelbaghoor.I2PConverterApp;
 
 import android.app.Activity;
 import android.content.Context;
@@ -25,11 +25,10 @@ import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import nabeelbaghoor.createpdf.adapter.ViewFilesAdapter;
-import nabeelbaghoor.createpdf.interfaces.EmptyStateChangeListener;
-import nabeelbaghoor.createpdf.util.DirectoryUtils;
-import nabeelbaghoor.createpdf.util.PopulateList;
-import swati4star.createpdf.R;
+import nabeelbaghoor.I2PConverterApp.util.EmptyStateChangeListener;
+import nabeelbaghoor.I2PConverterApp.util.DirectoryUtils;
+import nabeelbaghoor.I2PConverterApp.util.PopulateList;
+import nabeelbaghoor.I2PConverterApp.R;
 
 public class ViewFilesFragment extends Fragment
         implements SwipeRefreshLayout.OnRefreshListener,

@@ -1,4 +1,4 @@
-package nabeelbaghoor.createpdf.activity;
+package nabeelbaghoor.I2PConverterApp;
 
 import android.Manifest;
 import android.app.Activity;
@@ -9,6 +9,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.PersistableBundle;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -17,6 +18,9 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
@@ -25,53 +29,25 @@ import com.google.firebase.analytics.FirebaseAnalytics;
 import java.io.File;
 import java.util.ArrayList;
 
-import nabeelbaghoor.createpdf.providers.fragmentmanagement.FragmentManagement;
-import swati4star.createpdf.R;
+import butterknife.BindView;
+import nabeelbaghoor.I2PConverterApp.FragmentManagement;
+import nabeelbaghoor.I2PConverterApp.R;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static final String[] READ_WRITE_CAMERA_PERMISSIONS = {
-            Manifest.permission.WRITE_EXTERNAL_STORAGE,
-            Manifest.permission.READ_EXTERNAL_STORAGE,
-            Manifest.permission.CAMERA
-    };
-    public static final String[] READ_WRITE_PERMISSIONS = {
-            Manifest.permission.WRITE_EXTERNAL_STORAGE,
-            Manifest.permission.READ_EXTERNAL_STORAGE
-    };
-    private static final int PERMISSION_REQUEST_CODE = 0;
     private FragmentManagement mFragmentManagement;
     private FirebaseAnalytics mFirebaseAnalytics;
-
-
-    public static void makeAndClearTemp() {
-        String dest = Environment.getExternalStorageDirectory().toString() +
-                "/PDFfiles/" + "temp";
-        File folder = new File(dest);
-        boolean result = folder.mkdir();
-
-        // clear all the files in it, if any
-        if (result && folder.isDirectory()) {
-            String[] children = folder.list();
-            for (String child : children) {
-                new File(folder, child).delete();
-            }
-        }
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
+//        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
 
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
 
-        MobileAds.initialize(this, new OnInitializationCompleteListener() {
-            @Override
-            public void onInitializationComplete(InitializationStatus initializationStatus) {
-            }
-        });
+
 
 //        Toolbar toolbar = findViewById(R.id.toolbar);
 //        setSupportActionBar(toolbar);
@@ -93,6 +69,16 @@ public class MainActivity extends AppCompatActivity {
         if (isStoragePermissionGranted()) {
             makeAndClearTemp();
         }
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState, @NonNull PersistableBundle outPersistentState) {
+        super.onSaveInstanceState(outState, outPersistentState);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
     }
 
     @Override
@@ -140,6 +126,10 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+
+
+
+
     public void requestRuntimePermissions(Object context, String[] permissions,
                                           int requestCode) {
         if (context instanceof Activity) {
@@ -176,8 +166,32 @@ public class MainActivity extends AppCompatActivity {
         }
         return true;
     }
+    public static void makeAndClearTemp() {
+        String dest = Environment.getExternalStorageDirectory().toString() +
+                "/PDFfiles/" + "temp";
+        File folder = new File(dest);
+        boolean result = folder.mkdir();
+
+        // clear all the files in it, if any
+        if (result && folder.isDirectory()) {
+            String[] children = folder.list();
+            for (String child : children) {
+                new File(folder, child).delete();
+            }
+        }
+    }
 
     private boolean isStoragePermissionGranted() {
         return checkRuntimePermissions(this, READ_WRITE_PERMISSIONS);
     }
+    public static final String[] READ_WRITE_CAMERA_PERMISSIONS = {
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.CAMERA
+    };
+    public static final String[] READ_WRITE_PERMISSIONS = {
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.READ_EXTERNAL_STORAGE
+    };
+    private static final int PERMISSION_REQUEST_CODE = 0;
 }

@@ -1,4 +1,4 @@
-package nabeelbaghoor.createpdf.util;
+package nabeelbaghoor.I2PConverterApp.util;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -21,8 +21,6 @@ import com.itextpdf.text.pdf.PdfWriter;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
-
-import nabeelbaghoor.createpdf.interfaces.OnPDFCreatedInterface;
 
 public class CreatePdf extends AsyncTask<String, String, String> {
 

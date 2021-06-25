@@ -1,4 +1,4 @@
-package nabeelbaghoor.createpdf.providers.fragmentmanagement;
+package nabeelbaghoor.I2PConverterApp;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,9 +8,7 @@ import androidx.fragment.app.FragmentActivity;
 
 import java.util.Objects;
 
-import swati4star.createpdf.R;
-import nabeelbaghoor.createpdf.activity.MainActivity;
-import nabeelbaghoor.createpdf.fragment.HomeFragment;
+import nabeelbaghoor.I2PConverterApp.R;
 
 //import android.support.v4.app.Fragment;
 //import android.support.v4.app.FragmentActivity;

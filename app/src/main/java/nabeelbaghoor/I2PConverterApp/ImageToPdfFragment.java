@@ -1,4 +1,4 @@
-package nabeelbaghoor.createpdf.fragment;
+package nabeelbaghoor.I2PConverterApp;
 
 import android.Manifest;
 import android.app.Activity;
@@ -33,23 +33,15 @@ import java.util.Objects;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import swati4star.createpdf.R;
-import nabeelbaghoor.createpdf.database.DatabaseHelper;
-import nabeelbaghoor.createpdf.interfaces.OnPDFCreatedInterface;
-import nabeelbaghoor.createpdf.util.CreatePdf;
-import nabeelbaghoor.createpdf.util.FileUtils;
-import nabeelbaghoor.createpdf.util.MorphButtonUtility;
+import nabeelbaghoor.I2PConverterApp.R;
+import nabeelbaghoor.I2PConverterApp.util.OnPDFCreatedInterface;
+import nabeelbaghoor.I2PConverterApp.util.CreatePdf;
+import nabeelbaghoor.I2PConverterApp.util.FileUtils;
+import nabeelbaghoor.I2PConverterApp.util.MorphButtonUtility;
 
 public class ImageToPdfFragment extends Fragment implements
         OnPDFCreatedInterface {
 
-    public static final String[] READ_WRITE_CAMERA_PERMISSIONS = {
-            Manifest.permission.WRITE_EXTERNAL_STORAGE,
-            Manifest.permission.READ_EXTERNAL_STORAGE,
-            Manifest.permission.CAMERA
-    };
-    private static final int INTENT_REQUEST_GET_IMAGES = 13;
-    private static final int REQUEST_PERMISSIONS_CODE = 124;
     private static final ArrayList<String> mUnarrangedImagesUri = new ArrayList<>();
     public static ArrayList<String> mImagesUri = new ArrayList<>();
     @BindView(R.id.pdfCreate)
@@ -287,7 +279,7 @@ public class ImageToPdfFragment extends Fragment implements
                 .choose(MimeType.ofImage(), false)
                 .countable(true)
                 .capture(true)
-                .captureStrategy(new CaptureStrategy(true, "com.swati4star.shareFile"))
+                .captureStrategy(new CaptureStrategy(true, "com.nabeelbaghoor.shareFile"))
                 .maxSelectable(1000)
                 .imageEngine(new PicassoEngine())
                 .forResult(INTENT_REQUEST_GET_IMAGES);
@@ -297,4 +289,13 @@ public class ImageToPdfFragment extends Fragment implements
         mImagesUri.clear();
 //        mNoOfImages.setVisibility(View.GONE);
     }
+
+    public static final String[] READ_WRITE_CAMERA_PERMISSIONS = {
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.CAMERA
+    };
+    private static final int INTENT_REQUEST_GET_IMAGES = 13;
+    private static final int REQUEST_PERMISSIONS_CODE = 124;
+
 }
