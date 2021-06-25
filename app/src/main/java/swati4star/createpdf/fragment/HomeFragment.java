@@ -3,16 +3,19 @@ package swati4star.createpdf.fragment;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import swati4star.createpdf.R;
+
 public class HomeFragment extends Fragment implements View.OnClickListener {
 
     @BindView(R.id.images_to_pdf)
@@ -43,10 +46,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
         Fragment fragment = null;
         FragmentManager fragmentManager = getFragmentManager();
-        Bundle bundle = new Bundle();
         switch (v.getId()) {
             case R.id.images_to_pdf:
-                fragment = new ImageToPdfFragment();
+                fragment = new Fragment();
                 break;
 
             case R.id.view_files:

@@ -3,25 +3,16 @@ package swati4star.createpdf.util;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Looper;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.annotation.WorkerThread;
 import android.text.TextUtils;
 
-import com.itextpdf.text.pdf.PdfReader;
+import androidx.annotation.Nullable;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 import swati4star.createpdf.adapter.ViewFilesAdapter;
 import swati4star.createpdf.interfaces.EmptyStateChangeListener;
-import swati4star.createpdf.model.PDFFile;
 
-/**
- * AsyncTask used to populate the list of elements in the background
- */
 public class PopulateList extends AsyncTask<Void, Void, Void> {
 
     private final int mCurrentSortingIndex;
@@ -32,15 +23,6 @@ public class PopulateList extends AsyncTask<Void, Void, Void> {
     @Nullable
     private final String mQuery;
 
-    /**
-     * Instantiates populate list object
-     *
-     * @param adapter                  - mAdapter to be notified with new data
-     * @param emptyStateChangeListener - set appropriate view on no results
-     * @param directoryUtils           - directory utils object
-     * @param index                    - sorting order
-     * @param mQuery                   - to filter pdf files, {@code null} to get all
-     */
     public PopulateList(ViewFilesAdapter adapter,
                         EmptyStateChangeListener emptyStateChangeListener,
                         DirectoryUtils directoryUtils, int index, @Nullable String mQuery) {
@@ -58,9 +40,6 @@ public class PopulateList extends AsyncTask<Void, Void, Void> {
         return null;
     }
 
-    /**
-     * Populate data into listView
-     */
     private void populateListView() {
         ArrayList<File> pdfFiles;
         if (TextUtils.isEmpty(mQuery)) {
@@ -75,41 +54,9 @@ public class PopulateList extends AsyncTask<Void, Void, Void> {
             mHandler.post(() -> mAdapter.setData(null));
         } else {
             mHandler.post(mEmptyStateChangeListener::setEmptyStateInvisible);
-//            FileSortUtils.getInstance().performSortOperation(mCurrentSortingIndex, pdfFiles);
-            List<PDFFile> pdfFilesWithEncryptionStatus = getPdfFilesWithEncryptionStatus(pdfFiles);
             mHandler.post(mEmptyStateChangeListener::hideNoPermissionsView);
-            mHandler.post(() -> mAdapter.setData(pdfFilesWithEncryptionStatus));
+            mHandler.post(() -> mAdapter.setData(pdfFiles));
             mHandler.post(mEmptyStateChangeListener::filesPopulated);
         }
-    }
-
-    //    /**
-//     * checks the encryption status of the files using {@link PDFUtils#isPDFEncrypted(String)}
-//     *
-//     * @param files files to get statuses
-//     * @return new list of {@link PDFFile} with encrypted status set
-//     */
-    @WorkerThread
-    public boolean isPDFEncrypted(String path) {
-        boolean isEncrypted;
-        PdfReader pdfReader = null;
-        try {
-            pdfReader = new PdfReader(path);
-            isEncrypted = pdfReader.isEncrypted();
-        } catch (IOException e) {
-            isEncrypted = true;
-        } finally {
-            if (pdfReader != null) pdfReader.close();
-        }
-        return isEncrypted;
-    }
-
-    @WorkerThread
-    private List<PDFFile> getPdfFilesWithEncryptionStatus(@NonNull List<File> files) {
-        List<PDFFile> pdfFiles = new ArrayList<>(files.size());
-        for (File file : files) {
-            pdfFiles.add(new PDFFile(file, isPDFEncrypted(file.getPath())));
-        }
-        return pdfFiles;
     }
 }

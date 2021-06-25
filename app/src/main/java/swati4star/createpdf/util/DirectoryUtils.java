@@ -1,9 +1,7 @@
 package swati4star.createpdf.util;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Environment;
-import android.preference.PreferenceManager;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -13,29 +11,16 @@ import java.util.List;
 import java.util.Set;
 
 import swati4star.createpdf.R;
-//
-//import static swati4star.createpdf.util.Constants.STORAGE_LOCATION;
-//import static swati4star.createpdf.util.Constants.excelExtension;
-//import static swati4star.createpdf.util.Constants.excelWorkbookExtension;
-//import static swati4star.createpdf.util.Constants.pdfExtension;
 
 public class DirectoryUtils {
 
     private final Context mContext;
-    private final SharedPreferences mSharedPreferences;
     private ArrayList<String> mFilePaths;
 
     public DirectoryUtils(Context context) {
         mContext = context;
-        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
     }
 
-    /**
-     * Used to search for PDF matching the search query
-     *
-     * @param query - Query from search bar
-     * @return ArrayList containing all the pdf files matching the search query
-     */
     ArrayList<File> searchPDF(String query) {
         ArrayList<File> searchResult = new ArrayList<>();
         final File[] files = getOrCreatePdfDirectory().listFiles();
@@ -51,13 +36,6 @@ public class DirectoryUtils {
         return searchResult;
     }
 
-    /**
-     * Used in searchPDF to give the closest result to search query
-     *
-     * @param query    - Query from search bar
-     * @param fileName - name of PDF file
-     * @return 1 if the search query and filename has same characters , otherwise 0
-     */
     private int checkChar(String query, String fileName) {
         query = query.toLowerCase();
         fileName = fileName.toLowerCase();
@@ -78,11 +56,6 @@ public class DirectoryUtils {
 
     // RETURNING LIST OF FILES OR DIRECTORIES
 
-    /**
-     * Returns pdf files from folder
-     *
-     * @param files list of files (folder)
-     */
     ArrayList<File> getPdfsFromPdfFolder(File[] files) {
         ArrayList<File> pdfFiles = new ArrayList<>();
         if (files == null)
@@ -109,12 +82,6 @@ public class DirectoryUtils {
         return pdfFiles;
     }
 
-    /**
-     * Checks if a given file is PDF
-     *
-     * @param file - input file
-     * @return tru - if condition satisfies, else false
-     */
     private boolean isPDFAndNotDirectory(File file) {
         return !file.isDirectory() &&
                 file.getName().endsWith(mContext.getString(R.string.pdf_ext));
@@ -126,22 +93,13 @@ public class DirectoryUtils {
                 "/PDFfiles/";
     }
 
-    /**
-     * create PDF directory if directory does not exists
-     */
     public File getOrCreatePdfDirectory() {
-        File folder = new File(mSharedPreferences.getString("storage_location",
-                getDefaultStorageLocation()));
+        File folder = new File(getDefaultStorageLocation());
         if (!folder.exists())
             folder.mkdir();
         return folder;
     }
 
-    /**
-     * get the PDF files stored in directories other than home directory
-     *
-     * @return ArrayList of PDF files
-     */
     public ArrayList<File> getPdfFromOtherDirectories() {
         mFilePaths = new ArrayList<>();
         walkDir(getOrCreatePdfDirectory());
@@ -151,33 +109,10 @@ public class DirectoryUtils {
         return files;
     }
 
-
-    /**
-     * gets a list of all the pdf files on the user device
-     *
-     * @return - list of file absolute paths
-     */
-    ArrayList<String> getAllPDFsOnDevice() {
-        mFilePaths = new ArrayList<>();
-        walkDir(Environment.getExternalStorageDirectory());
-        return mFilePaths;
-    }
-
-    /**
-     * Walks through given dir & sub directory, and append file path to mFilePaths
-     *
-     * @param dir - root directory
-     */
     private void walkDir(File dir) {
         walkDir(dir, Collections.singletonList(".pdf"));
     }
 
-    /**
-     * Walks through given dir & sub direc, and append file path to mFilePaths
-     *
-     * @param dir        - root directory
-     * @param extensions - a list of file extensions to search for
-     */
     private void walkDir(File dir, List<String> extensions) {
         File[] listFile = dir.listFiles();
         if (listFile != null) {

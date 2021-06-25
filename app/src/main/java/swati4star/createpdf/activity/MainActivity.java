@@ -9,18 +9,19 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
-import android.support.annotation.NonNull;
-import android.support.design.widget.NavigationView;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.util.SparseIntArray;
-import android.view.MenuItem;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -28,8 +29,7 @@ import java.util.ArrayList;
 import swati4star.createpdf.R;
 import swati4star.createpdf.providers.fragmentmanagement.FragmentManagement;
 
-public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity {
 
     public static final String[] READ_WRITE_CAMERA_PERMISSIONS = {
             Manifest.permission.WRITE_EXTERNAL_STORAGE,
@@ -41,8 +41,6 @@ public class MainActivity extends AppCompatActivity
             Manifest.permission.READ_EXTERNAL_STORAGE
     };
     private static final int PERMISSION_REQUEST_CODE = 0;
-    private NavigationView mNavigationView;
-    private SparseIntArray mFragmentSelectedMap;
     private FragmentManagement mFragmentManagement;
 
     public static void makeAndClearTemp() {
@@ -66,42 +64,24 @@ public class MainActivity extends AppCompatActivity
 
         setContentView(R.layout.activity_main);
 
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+            }
+        });
+
         Toolbar toolbar = findViewById(R.id.toolbar);
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         setSupportActionBar(toolbar);
-
-        // Set navigation drawer
-//        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-//                this, drawer, toolbar, R.string.app_name, R.string.app_name);
-
-        //Replaced setDrawerListener with addDrawerListener because it was deprecated.
-//        drawer.addDrawerListener(toggle);
-//        toggle.syncState();
 
         // initialize values
         initializeValues();
 
-        setXMLParsers();
         // Check for app shortcuts & select default fragment
         Fragment fragment = mFragmentManagement.checkForAppShortcutClicked();
 
         // Check if  images are received
         handleReceivedImagesIntent(fragment);
-
-//        displayFeedBackAndWhatsNew();
         getRuntimePermissions();
-    }
-
-    /**
-     * Set suitable xml parsers for reading .docx files.
-     */
-    private void setXMLParsers() {
-        System.setProperty("org.apache.poi.javax.xml.stream.XMLInputFactory",
-                "com.fasterxml.aalto.stax.InputFactoryImpl");
-        System.setProperty("org.apache.poi.javax.xml.stream.XMLOutputFactory",
-                "com.fasterxml.aalto.stax.OutputFactoryImpl");
-        System.setProperty("org.apache.poi.javax.xml.stream.XMLEventFactory",
-                "com.fasterxml.aalto.stax.EventFactoryImpl");
     }
 
     @Override
@@ -120,22 +100,10 @@ public class MainActivity extends AppCompatActivity
             actionBar.show();
     }
 
-    /**
-     * Ininitializes default values
-     */
     private void initializeValues() {
-        mNavigationView = findViewById(R.id.nav_view);
-        mNavigationView.setNavigationItemSelectedListener(this);
-        mNavigationView.setCheckedItem(R.id.nav_home);
-
-        mFragmentManagement = new FragmentManagement(this, mNavigationView);
+        mFragmentManagement = new FragmentManagement(this);
     }
 
-    /**
-     * Checks if images are received in the intent
-     *
-     * @param fragment - instance of current fragment
-     */
     private void handleReceivedImagesIntent(Fragment fragment) {
         Intent intent = getIntent();
         String action = intent.getAction();
@@ -151,12 +119,6 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    /**
-     * Get image uri from intent and send the image to homeFragment
-     *
-     * @param intent   - intent containing image uris
-     * @param fragment - instance of homeFragment
-     */
     private void handleSendImage(Intent intent, Fragment fragment) {
         Uri uri = intent.getParcelableExtra(Intent.EXTRA_STREAM);
         ArrayList<Uri> imageUris = new ArrayList<>();
@@ -166,12 +128,6 @@ public class MainActivity extends AppCompatActivity
         fragment.setArguments(bundle);
     }
 
-    /**
-     * Get ArrayList of image uris from intent and send the image to homeFragment
-     *
-     * @param intent   - intent containing image uris
-     * @param fragment - instance of homeFragment
-     */
     private void handleSendMultipleImages(Intent intent, Fragment fragment) {
         ArrayList<Uri> imageUris = intent.getParcelableArrayListExtra(Intent.EXTRA_STREAM);
         if (imageUris != null) {
@@ -179,31 +135,6 @@ public class MainActivity extends AppCompatActivity
             bundle.putParcelableArrayList(getString(R.string.bundleKey), imageUris);
             fragment.setArguments(bundle);
         }
-    }
-
-    @Override
-    public void onBackPressed() {
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            boolean shouldExit = mFragmentManagement.handleBackPressed();
-            if (shouldExit)
-                super.onBackPressed();
-        }
-    }
-
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-
-        setTitleFragment(mFragmentSelectedMap.get(item.getItemId()));
-        return mFragmentManagement.handleNavigationItemSelected(item.getItemId());
-    }
-
-    public void setNavigationViewSelection(int id) {
-        mNavigationView.setCheckedItem(id);
     }
 
     public void requestRuntimePermissions(Object context, String[] permissions,
@@ -245,15 +176,5 @@ public class MainActivity extends AppCompatActivity
 
     private boolean isStoragePermissionGranted() {
         return checkRuntimePermissions(this, READ_WRITE_PERMISSIONS);
-    }
-
-    /**
-     * Sets fragment title
-     *
-     * @param title - string resource id
-     */
-    private void setTitleFragment(int title) {
-        if (title != 0)
-            setTitle(title);
     }
 }

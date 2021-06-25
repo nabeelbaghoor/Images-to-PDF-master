@@ -15,15 +15,6 @@
     <string name="search">recherche</string>
     <array name="items">
         <item>Ouvrir Fichier</item>
-        <item>Supprimer Fichier</item>
-        <item>Renommer Fichier</item>
-        <item>Imprimer Fichier</item>
-        <item>Partager le fichier</item>
-        <item>afficher les détails</item>
-        <item>Ajouter un mot de passe</item>
-        <item>Supprimer le mot de</item>
-        <item>Faire pivoter les pages</item>
-        <item>Ajouter une filigrane</item>
     </array>
     <string name="please_wait">Veuillez patienter</string>
     <string name="create_pdf">Accueil</string>

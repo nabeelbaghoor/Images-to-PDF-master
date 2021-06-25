@@ -15,15 +15,6 @@
 
     <array name="items">
         <item>Abrir archivo</item>
-        <item>Borrar archivo</item>
-        <item>Renombrar archivo</item>
-        <item>Imprimir archivo</item>
-        <item>Compartir archivo</item>
-        <item>Mostrar detalles</item>
-        <item>Agregar contraseña</item>
-        <item>Quitar contraseña</item>
-        <item>Rotar páginas</item>
-        <item>Agregar marca de agua</item>
     </array>
 
     <string name="please_wait">Por favor espere</string>

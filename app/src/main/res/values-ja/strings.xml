@@ -15,15 +15,6 @@
 
     <array name="items">
         <item>ファイルを開く</item>
-        <item>ファイルを削除</item>
-        <item>ファイルの名前を変更</item>
-        <item>ファイルを印刷</item>
-        <item>Share File</item>
-        <item>詳細を表示</item>
-        <item>パスワードを追加</item>
-        <item>パスワードを削除します</item>
-        <item>ページを回転する</item>
-        <item>Add Watermark</item>
     </array>
 
     <string name="please_wait">Please Wait</string>

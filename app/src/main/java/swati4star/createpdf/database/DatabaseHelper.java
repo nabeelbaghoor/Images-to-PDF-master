@@ -13,12 +13,6 @@ public class DatabaseHelper {
         this.mContext = mContext;
     }
 
-    /**
-     * To insert record in the database
-     *
-     * @param filePath      path of the file
-     * @param operationType operation performed on file
-     */
     public void insertRecord(String filePath, String operationType) {
         new Insert().execute(new History(filePath, new Date().toString(), operationType));
     }

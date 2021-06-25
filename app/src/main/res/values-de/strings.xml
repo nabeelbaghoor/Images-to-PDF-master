@@ -23,24 +23,10 @@
     <string name="prompt_input">Hier eintreten</string>
     <array name="items">
         <item>Open File</item>
-        <item>Delete File</item>
-        <item>Rename File</item>
-        <item>Print File</item>
-        <item>Share File</item>
-        <item>Show Details</item>
-        <item>Add Password</item>
-        <item>Remove Password</item>
-        <item>Rotate Pages</item>
-        <item>Add Watermark</item>
     </array>
 
     <array name="itemIds" translatable="false">
         <item>open</item>
-        <item>delete</item>
-        <item>rename</item>
-        <item>print</item>
-        <item>e-mail</item>
-        <item>details</item>
     </array>
 
     <string-array name="array_page_sizes_b0_b10" translatable="false">

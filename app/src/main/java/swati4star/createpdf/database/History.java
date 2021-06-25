@@ -1,8 +1,8 @@
 package swati4star.createpdf.database;
 
-import android.arch.persistence.room.ColumnInfo;
-import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.PrimaryKey;
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
 @Entity
 public class History {
@@ -35,10 +35,6 @@ public class History {
         return mFilePath;
     }
 
-    public void setFilePath(String fileName) {
-        this.mFilePath = fileName;
-    }
-
     public String getDate() {
         return mDate;
     }
@@ -49,9 +45,5 @@ public class History {
 
     public String getOperationType() {
         return mOperationType;
-    }
-
-    public void setOperationType(String operationType) {
-        this.mOperationType = operationType;
     }
 }

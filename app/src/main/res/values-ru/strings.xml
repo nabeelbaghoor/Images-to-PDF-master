@@ -18,15 +18,6 @@
     <string name="prompt_input">Введите</string>
     <array name="items">
         <item>Открыть</item>
-        <item>Удалить</item>
-        <item>Переименовать</item>
-        <item>Печатать</item>
-        <item>Поделиться</item>
-        <item>Свойства</item>
-        <item>Установить пароль</item>
-        <item>Удалить пароль</item>
-        <item>Повернуть страницы</item>
-        <item>Add Watermark</item>
     </array>
 
     <string name="please_wait">Подождите</string>

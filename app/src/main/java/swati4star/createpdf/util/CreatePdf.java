@@ -4,8 +4,9 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.AsyncTask;
-import android.support.annotation.NonNull;
 import android.util.Log;
+
+import androidx.annotation.NonNull;
 
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
@@ -22,55 +23,40 @@ import java.io.FileOutputStream;
 import java.util.ArrayList;
 
 import swati4star.createpdf.interfaces.OnPDFCreatedInterface;
-import swati4star.createpdf.model.ImageToPDFOptions;
 
-//import static swati4star.createpdf.util.Constants.IMAGE_SCALE_TYPE_ASPECT_RATIO;
-//import static swati4star.createpdf.util.Constants.pdfExtension;
-
-/**
- * An async task that converts selected images to Pdf
- */
 public class CreatePdf extends AsyncTask<String, String, String> {
 
     private final String mFileName;
-    private final String mPassword;
     private final String mQualityString;
     private final ArrayList<String> mImagesUri;
     private final int mBorderWidth;
     private final OnPDFCreatedInterface mOnPDFCreatedInterface;
     private final String mPageSize;
-    private final boolean mPasswordProtected;
-    //    private final Boolean mWatermarkAdded;
     private final int mMarginTop;
     private final int mMarginBottom;
     private final int mMarginRight;
     private final int mMarginLeft;
     private final String mImageScaleType;
     private final String mPageNumStyle;
-    private final String mMasterPwd;
     private final int mPageColor;
     private boolean mSuccess;
     private String mPath;
 
-    public CreatePdf(ImageToPDFOptions mImageToPDFOptions, String parentPath,
+    public CreatePdf(ArrayList<String> mImagesUri, String filename, String parentPath,
                      OnPDFCreatedInterface onPDFCreated) {
-        this.mImagesUri = mImageToPDFOptions.getImagesUri();
-        this.mFileName = mImageToPDFOptions.getOutFileName();
-        this.mPassword = mImageToPDFOptions.getPassword();
-        this.mQualityString = mImageToPDFOptions.getQualityString();
+        this.mImagesUri = mImagesUri;
+        this.mFileName = filename;
+        this.mQualityString = Integer.toString(30);
         this.mOnPDFCreatedInterface = onPDFCreated;
-        this.mPageSize = mImageToPDFOptions.getPageSize();
-        this.mPasswordProtected = mImageToPDFOptions.isPasswordProtected();
-        this.mBorderWidth = mImageToPDFOptions.getBorderWidth();
-//        this.mWatermarkAdded = mImageToPDFOptions.isWatermarkAdded();
-        this.mMarginTop = mImageToPDFOptions.getMarginTop();
-        this.mMarginBottom = mImageToPDFOptions.getMarginBottom();
-        this.mMarginRight = mImageToPDFOptions.getMarginRight();
-        this.mMarginLeft = mImageToPDFOptions.getMarginLeft();
-        this.mImageScaleType = mImageToPDFOptions.getImageScaleType();
-        this.mPageNumStyle = mImageToPDFOptions.getPageNumStyle();
-        this.mMasterPwd = mImageToPDFOptions.getMasterPwd();
-        this.mPageColor = mImageToPDFOptions.getPageColor();
+        this.mPageSize = "DefaultPageSize"; //"A4"
+        this.mBorderWidth = 0;
+        this.mMarginTop = 0;
+        this.mMarginBottom = 0;
+        this.mMarginRight = 0;
+        this.mMarginLeft = 0;
+        this.mImageScaleType = "maintain_aspect_ratio";
+        this.mPageNumStyle = "pref_page_number_style";
+        this.mPageColor = Color.WHITE;
         mPath = parentPath;
     }
 
@@ -112,13 +98,6 @@ public class CreatePdf extends AsyncTask<String, String, String> {
 
             Log.v("Stage 3", "Pdf writer");
 
-            if (mPasswordProtected) {
-                writer.setEncryption(mPassword.getBytes(), mMasterPwd.getBytes(),
-                        PdfWriter.ALLOW_PRINTING | PdfWriter.ALLOW_COPY,
-                        PdfWriter.ENCRYPTION_AES_128);
-
-                Log.v("Stage 3.1", "Set Encryption");
-            }
             document.open();
 
             Log.v("Stage 4", "Document opened");
@@ -210,11 +189,6 @@ public class CreatePdf extends AsyncTask<String, String, String> {
         mOnPDFCreatedInterface.onPDFCreated(mSuccess, mPath);
     }
 
-    /**
-     * Read the BaseColor of passed color
-     *
-     * @param color value of color in int
-     */
     private BaseColor getBaseColor(int color) {
         return new BaseColor(
                 Color.red(color),
