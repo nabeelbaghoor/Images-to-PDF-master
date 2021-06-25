@@ -73,6 +73,7 @@ dependencies {
     implementation 'com.android.support:recyclerview-v7:28.0.0'
     implementation 'com.android.support:support-v4:28.0.0'
     implementation 'com.android.support:preference-v7:28.0.0'
+    implementation 'com.google.firebase:firebase-analytics'
 
     // butterknife
     implementation 'com.jakewharton:butterknife:8.8.1'

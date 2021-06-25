@@ -14,6 +14,8 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 
+import nabeelbaghoor.createpdf.util.DirectoryUtils;
+
 import static java.util.Arrays.asList;
 
 @RunWith(AndroidJUnit4.class)

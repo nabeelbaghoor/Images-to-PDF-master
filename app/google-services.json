@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "153490629561",
+    "project_id": "i2pconverterapp-d7b8d",
+    "storage_bucket": "i2pconverterapp-d7b8d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:153490629561:android:8fa1878d1d7514ec4bcc68",
+        "android_client_info": {
+          "package_name": "com.nabeelbaghoor.I2PConverterApp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "153490629561-tb8ihvmaf0ltr49gkck3ckjcceknvfct.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBOawiwj5EXaTFtu3OigOTNbzxRRD6HOMU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "153490629561-tb8ihvmaf0ltr49gkck3ckjcceknvfct.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
